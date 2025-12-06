@@ -58,7 +58,7 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
-      <section className="relative flex min-h-screen items-center justify-center overflow-hidden bg-gray-950 px-4 pt-20 pb-16 sm:px-6 lg:px-8">
+      <section className="relative flex min-h-screen items-center justify-center overflow-hidden bg-gray-950 px-4 py-12 sm:px-6 lg:px-8 lg:py-0">
         
         {/* Video Background */}
         <div className="absolute inset-0 -z-10 h-full w-full overflow-hidden">
@@ -76,42 +76,42 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
           </video>
         </div>
         
-        <div className="relative z-20 mx-auto max-w-7xl w-full">
-          <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-8 items-center">
+        <div className="relative z-20 mx-auto max-w-7xl w-full pt-16 lg:pt-0">
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-16 items-center">
             
             {/* Left Column: Text Content */}
-            <div className="text-left space-y-8">
-              <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl font-serif leading-tight">
+            <div className="text-left space-y-6 lg:space-y-8">
+              <h1 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl lg:text-5xl font-serif leading-tight">
                 Specializes in <br/>
                 <span className="text-brand-500">Web Design</span>, Software, <br/>
                 Mobile Apps, <br/>
                 Development and <span className="text-brand-500">SEO</span>
               </h1>
               
-              <p className="max-w-2xl text-lg text-gray-300 sm:text-xl leading-relaxed">
+              <p className="max-w-2xl text-base text-gray-300 sm:text-lg leading-relaxed">
                 As a leading Pakistan web design and website development company, we provide the best solutions to our clients which enable them to enhance their market share and help them achieve their goals and objectives in the desired time span.
               </p>
               
               <div className="flex flex-wrap items-center gap-4">
                 <button
                   onClick={() => onNavigate('services')}
-                  className="rounded-full bg-[#fbbf24] px-8 py-3.5 text-base font-bold text-gray-950 transition-all hover:bg-[#f59e0b] hover:shadow-[0_0_20px_rgba(251,191,36,0.4)]"
+                  className="rounded-full bg-[#fbbf24] px-8 py-3 text-sm sm:text-base font-bold text-gray-950 transition-all hover:bg-[#f59e0b] hover:shadow-[0_0_20px_rgba(251,191,36,0.4)]"
                 >
                   Get Started
                 </button>
                 <button
-                   className="flex h-12 w-12 items-center justify-center rounded-full bg-[#25D366] text-white transition-transform hover:scale-110 hover:shadow-[0_0_20px_rgba(37,211,102,0.4)]"
+                   className="flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-full bg-[#25D366] text-white transition-transform hover:scale-110 hover:shadow-[0_0_20px_rgba(37,211,102,0.4)]"
                    aria-label="WhatsApp"
                 >
-                  <MessageCircle className="h-6 w-6 fill-current" />
+                  <MessageCircle className="h-5 w-5 sm:h-6 sm:w-6 fill-current" />
                 </button>
               </div>
             </div>
 
             {/* Right Column: Callback Form */}
             <div className="bg-white rounded-xl shadow-2xl p-6 sm:p-8 text-gray-900 lg:max-w-md lg:ml-auto w-full border-t-4 border-[#fbbf24]">
-              <h2 className="text-2xl font-bold text-gray-900 mb-1">Get a Call back Request</h2>
-              <p className="text-sm text-gray-500 mb-6">All Inquiries are Responded within 24 hours</p>
+              <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-1">Get a Call back Request</h2>
+              <p className="text-xs sm:text-sm text-gray-500 mb-6">All Inquiries are Responded within 24 hours</p>
               
               <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
                 <div className="grid grid-cols-2 gap-4">

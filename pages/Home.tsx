@@ -12,47 +12,47 @@ interface HomeProps {
 }
 
 const Home: React.FC<HomeProps> = ({ onNavigate }) => {
-  // Clients data with styled text fallbacks and fixed images
+  // Clients data - Switched to text-only for consistency and cleaner look
   const clients = [
     { 
       name: 'Govt. of Punjab', 
-      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Government_of_Punjab%2C_Pakistan_Logo.svg/200px-Government_of_Punjab%2C_Pakistan_Logo.svg.png',
-      style: ''
+      logo: null,
+      style: 'font-serif font-bold text-green-800 text-lg text-center leading-tight'
     },
     { 
       name: 'Virgin Printing', 
       logo: null, 
-      style: 'font-sans font-black tracking-tighter text-blue-900 text-xl' 
+      style: 'font-sans font-black tracking-tighter text-blue-900 text-lg' 
     }, 
     { 
       name: 'SPARTA', 
       logo: null, 
-      style: 'font-serif font-bold tracking-widest text-gray-900 text-lg' 
+      style: 'font-serif font-bold tracking-widest text-gray-900 text-base' 
     }, 
     { 
       name: 'Belgian Jewels', 
       logo: null, 
-      style: 'font-serif italic text-amber-700 text-xl' 
+      style: 'font-serif italic text-amber-700 text-lg' 
     }, 
     { 
       name: 'Nestlé', 
-      logo: null, // Fixed: Removed broken URL
-      style: 'font-sans font-bold text-gray-800 text-2xl tracking-tight' 
+      logo: null,
+      style: 'font-sans font-bold text-gray-600 text-xl tracking-tight' 
     }, 
     { 
       name: 'Univ. of Faisalabad', 
       logo: null, 
-      style: 'font-serif font-bold text-green-900 text-lg uppercase text-center leading-tight' 
+      style: 'font-serif font-bold text-green-900 text-base uppercase text-center leading-tight' 
     }, 
     { 
-      name: 'Sapphire', 
+      name: 'SAPPHIRE', 
       logo: null, 
-      style: 'font-sans font-light tracking-[0.3em] text-cyan-950 text-lg uppercase' 
+      style: 'font-sans font-bold tracking-[0.3em] text-black text-lg uppercase' 
     }, 
     { 
       name: 'Khaadi', 
       logo: null, 
-      style: 'font-mono font-bold tracking-tighter text-orange-800 text-2xl' 
+      style: 'font-mono font-bold tracking-tighter text-orange-800 text-xl' 
     },
   ];
 
@@ -61,15 +61,22 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
       {/* Hero Section */}
       <section className="relative flex min-h-screen items-center justify-center overflow-hidden bg-gray-950 px-4 py-12 sm:px-6 lg:px-8 lg:py-0">
         
+        {/* Animated Background Blobs */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-[-10%] left-[-10%] w-96 h-96 bg-brand-500/20 rounded-full blur-3xl animate-blob"></div>
+          <div className="absolute top-[20%] right-[-10%] w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-blob animation-delay-2000"></div>
+          <div className="absolute bottom-[-10%] left-[20%] w-96 h-96 bg-blue-500/20 rounded-full blur-3xl animate-blob animation-delay-4000"></div>
+        </div>
+
         {/* Video Background */}
         <div className="absolute inset-0 -z-10 h-full w-full overflow-hidden">
-          <div className="absolute inset-0 bg-gray-950/70 z-10" /> 
+          <div className="absolute inset-0 bg-gray-950/80 z-10" /> 
           <video
             autoPlay
             loop
             muted
             playsInline
-            className="h-full w-full object-cover opacity-60"
+            className="h-full w-full object-cover opacity-50"
           >
             {/* Global Network / Earth loop */}
             <source src="https://cdn.pixabay.com/video/2019/04/20/22967-332386926_large.mp4" type="video/mp4" />
@@ -370,13 +377,10 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
       </section>
 
       {/* Enhanced Our Happy Clients Slider Section */}
-      <section className="bg-white py-20 text-gray-900 overflow-hidden relative">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mb-12 text-center">
-          <h2 className="text-3xl font-bold text-[#003366] font-serif">Our Happy Clients</h2>
-          <div className="mx-auto mt-2 h-1 w-20 bg-brand-500 rounded-full"></div>
-          <p className="mt-4 text-gray-600 max-w-2xl mx-auto">
-            We are honored to have worked with some of the leading organizations and brands.
-          </p>
+      <section className="bg-white py-12 text-gray-900 overflow-hidden relative">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mb-8 text-center">
+          <h2 className="text-2xl font-bold text-[#003366] font-serif">Our Happy Clients</h2>
+          <div className="mx-auto mt-2 h-1 w-16 bg-brand-500 rounded-full"></div>
         </div>
         
         {/* Infinite Scroll Marquee Container */}
@@ -385,24 +389,16 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
           <div className="absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-white to-transparent pointer-events-none"></div>
           <div className="absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-white to-transparent pointer-events-none"></div>
           
-          <div className="flex w-max animate-scroll gap-8 py-6">
+          <div className="flex w-max animate-scroll gap-6 py-4">
              {/* Map clients twice for seamless loop */}
              {[...clients, ...clients].map((client, idx) => (
                <div 
                  key={idx} 
-                 className="shrink-0 w-[240px] h-[120px] rounded-xl border border-gray-100 bg-white shadow-sm flex items-center justify-center p-6 hover:shadow-xl hover:border-gray-200 hover:-translate-y-1 transition-all duration-300"
+                 className="shrink-0 w-[200px] h-[80px] rounded-lg border border-gray-100 bg-white shadow-sm flex items-center justify-center p-4 hover:shadow-md hover:border-gray-200 transition-all duration-300"
                >
-                 {client.logo ? (
-                   <img 
-                     src={client.logo} 
-                     alt={client.name} 
-                     className="max-h-full max-w-full object-contain grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all duration-300" 
-                   />
-                 ) : (
-                   <span className={`text-center transition-colors duration-300 ${client.style || 'font-bold text-[#003366] text-lg'}`}>
-                     {client.name}
-                   </span>
-                 )}
+                 <span className={`text-center transition-colors duration-300 ${client.style || 'font-bold text-[#003366] text-lg'}`}>
+                   {client.name}
+                 </span>
                </div>
              ))}
           </div>
@@ -414,7 +410,7 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
             100% { transform: translateX(-50%); }
           }
           .animate-scroll {
-            animation: scroll 40s linear infinite;
+            animation: scroll 30s linear infinite;
           }
           .group:hover .animate-scroll {
             animation-play-state: paused;

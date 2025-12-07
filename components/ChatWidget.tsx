@@ -1,6 +1,6 @@
 
 import React, { useState, useRef, useEffect } from 'react';
-import { MessageSquare, X, Send, Sparkles, Loader2 } from 'lucide-react';
+import { MessageSquare, X, Send, Sparkles, Loader2, ThumbsUp, ThumbsDown } from 'lucide-react';
 import { ChatMessage, LoadingState } from '../types';
 import { sendMessageToGemini } from '../services/geminiService';
 
@@ -39,6 +39,18 @@ const ChatWidget: React.FC = () => {
     if (e.key === 'Enter') handleSend();
   };
 
+  const handleFeedback = (index: number, type: 'up' | 'down') => {
+    setMessages(prev => prev.map((msg, i) => {
+      if (i === index) {
+        return { 
+          ...msg, 
+          feedback: msg.feedback === type ? undefined : type 
+        };
+      }
+      return msg;
+    }));
+  };
+
   return (
     <>
       {/* Toggle Button */}
@@ -69,7 +81,7 @@ const ChatWidget: React.FC = () => {
               {messages.map((msg, idx) => (
                 <div
                   key={idx}
-                  className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                  className={`flex flex-col ${msg.role === 'user' ? 'items-end' : 'items-start'}`}
                 >
                   <div
                     className={`max-w-[80%] rounded-2xl px-4 py-3 text-sm leading-relaxed ${
@@ -80,6 +92,30 @@ const ChatWidget: React.FC = () => {
                   >
                     {msg.text}
                   </div>
+                  {msg.role === 'model' && (
+                    <div className="mt-1 flex gap-2 px-1">
+                      <button
+                        onClick={() => handleFeedback(idx, 'up')}
+                        className={`rounded p-1 transition-colors hover:bg-gray-800 ${
+                          msg.feedback === 'up' ? 'text-brand-500' : 'text-gray-500'
+                        }`}
+                        aria-label="Helpful"
+                        title="Helpful"
+                      >
+                        <ThumbsUp className="h-3 w-3" />
+                      </button>
+                      <button
+                        onClick={() => handleFeedback(idx, 'down')}
+                        className={`rounded p-1 transition-colors hover:bg-gray-800 ${
+                          msg.feedback === 'down' ? 'text-rose-500' : 'text-gray-500'
+                        }`}
+                        aria-label="Not helpful"
+                        title="Not helpful"
+                      >
+                        <ThumbsDown className="h-3 w-3" />
+                      </button>
+                    </div>
+                  )}
                 </div>
               ))}
               {status === LoadingState.LOADING && (

@@ -12,6 +12,7 @@ export type PageView = 'home' | 'services' | 'contact' | 'about' | 'privacy' | '
 export interface ChatMessage {
   role: 'user' | 'model';
   text: string;
+  feedback?: 'up' | 'down';
 }
 
 export enum LoadingState {

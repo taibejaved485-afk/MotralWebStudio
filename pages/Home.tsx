@@ -1,9 +1,10 @@
+
 import React, { useRef } from 'react';
 import { PageView } from '../types';
 import { 
   ArrowRight, Code, Zap, Globe, MessageCircle, 
   HandCoins, Clock, Award, Lightbulb, MessagesSquare, Headset,
-  ChevronLeft, ChevronRight
+  ChevronLeft, ChevronRight, ExternalLink
 } from 'lucide-react';
 
 interface HomeProps {
@@ -298,6 +299,72 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                 <p className="text-gray-400 leading-relaxed">{item.desc}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Portfolio / Featured Projects Section */}
+      <section id="portfolio" className="bg-gray-950 py-24 border-t border-gray-800 relative overflow-hidden">
+        {/* Decorative background element */}
+        <div className="absolute top-0 right-0 -mr-20 -mt-20 h-[500px] w-[500px] rounded-full bg-brand-900/10 blur-3xl pointer-events-none"></div>
+
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+            <div className="max-w-2xl">
+              <h2 className="text-brand-500 font-semibold uppercase tracking-wide text-sm mb-2">Our Work</h2>
+              <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl font-serif">
+                Featured Projects
+              </h2>
+              <p className="mt-4 text-gray-400 text-lg">
+                Explore our latest work. We build digital solutions that drive growth and efficiency.
+              </p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* MT Store Project Card */}
+            <a 
+              href="https://mtstore.infinityfree.me" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="group flex flex-col overflow-hidden rounded-2xl bg-gray-900 border border-gray-800 transition-all hover:border-brand-500/50 hover:shadow-2xl hover:-translate-y-2"
+            >
+              {/* Image Area */}
+              <div className="relative aspect-[16/10] overflow-hidden bg-gray-800">
+                <div className="absolute inset-0 bg-gradient-to-br from-gray-800 to-gray-900 group-hover:scale-105 transition-transform duration-700"></div>
+                
+                {/* Abstract visualization since no screenshot */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="text-center">
+                        <div className="w-16 h-16 mx-auto bg-brand-500 rounded-2xl rotate-12 mb-4 shadow-lg flex items-center justify-center transition-transform group-hover:rotate-0">
+                            <span className="text-2xl font-bold text-white -rotate-12 group-hover:rotate-0 transition-transform">M</span>
+                        </div>
+                        <h3 className="text-2xl font-serif font-bold text-white/20 uppercase tracking-widest group-hover:text-white/40 transition-colors">MT Store</h3>
+                    </div>
+                </div>
+
+                {/* Overlay */}
+                <div className="absolute inset-0 bg-brand-900/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-sm">
+                  <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 flex items-center gap-2 text-white font-bold bg-white/10 px-6 py-3 rounded-full border border-white/20 hover:bg-white hover:text-brand-900">
+                    Visit Website <ExternalLink className="h-4 w-4" />
+                  </div>
+                </div>
+              </div>
+
+              {/* Content Area */}
+              <div className="p-6 flex-1 flex flex-col">
+                <div className="mb-4">
+                  <h3 className="text-xl font-bold text-white mb-2 group-hover:text-brand-500 transition-colors">MT Store</h3>
+                  <p className="text-gray-400 text-sm line-clamp-2">
+                    A fully functional e-commerce platform built for performance and sales.
+                  </p>
+                </div>
+                <div className="mt-auto flex flex-wrap gap-2">
+                  <span className="inline-flex items-center rounded-md bg-brand-950/50 px-2 py-1 text-xs font-medium text-brand-400 ring-1 ring-inset ring-brand-500/20">E-Commerce</span>
+                  <span className="inline-flex items-center rounded-md bg-gray-800 px-2 py-1 text-xs font-medium text-gray-300 ring-1 ring-inset ring-gray-700/20">Web Design</span>
+                </div>
+              </div>
+            </a>
           </div>
         </div>
       </section>

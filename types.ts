@@ -7,7 +7,7 @@ export interface Service {
   features: string[];
 }
 
-export type PageView = 'home' | 'services' | 'contact' | 'about' | 'privacy';
+export type PageView = 'home' | 'services' | 'contact' | 'about' | 'privacy' | 'terms';
 
 export interface ChatMessage {
   role: 'user' | 'model';

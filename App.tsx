@@ -7,7 +7,9 @@ import Services from './pages/Services';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsOfService from './pages/TermsOfService';
 import ChatWidget from './components/ChatWidget';
+import WhatsAppButton from './components/WhatsAppButton';
 import ConnectCTA from './components/ConnectCTA';
 import { PageView } from './types';
 
@@ -26,6 +28,8 @@ const App: React.FC = () => {
         return <Contact />;
       case 'privacy':
         return <PrivacyPolicy />;
+      case 'terms':
+        return <TermsOfService />;
       default:
         return <Home onNavigate={setCurrentPage} />;
     }
@@ -39,10 +43,13 @@ const App: React.FC = () => {
         {renderPage()}
       </main>
 
-      {/* CTA Section on every page except Privacy Policy to keep it clean, or keep it if desired. keeping it for consistency */}
+      {/* CTA Section on every page except Privacy/Terms to keep it clean, or keep it if desired. keeping it for consistency */}
       <ConnectCTA onNavigate={setCurrentPage} />
 
       <Footer onNavigate={setCurrentPage} />
+      
+      {/* Floating Action Buttons */}
+      <WhatsAppButton />
       <ChatWidget />
     </div>
   );

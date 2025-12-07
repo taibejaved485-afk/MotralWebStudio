@@ -1,3 +1,4 @@
+
 import React, { useState, useRef, useEffect } from 'react';
 import { MessageSquare, X, Send, Sparkles, Loader2 } from 'lucide-react';
 import { ChatMessage, LoadingState } from '../types';
@@ -6,7 +7,7 @@ import { sendMessageToGemini } from '../services/geminiService';
 const ChatWidget: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([
-    { role: 'model', text: 'Hi! I\'m the Motral AI Assistant. How can I help you improve your web presence today?' }
+    { role: 'model', text: 'Hello! I\'m your AI assistant for Motral Web Studio. How can I help you today?' }
   ]);
   const [inputText, setInputText] = useState('');
   const [status, setStatus] = useState<LoadingState>(LoadingState.IDLE);

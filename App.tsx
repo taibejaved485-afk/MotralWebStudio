@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -5,6 +6,7 @@ import Home from './pages/Home';
 import Services from './pages/Services';
 import About from './pages/About';
 import Contact from './pages/Contact';
+import PrivacyPolicy from './pages/PrivacyPolicy';
 import ChatWidget from './components/ChatWidget';
 import ConnectCTA from './components/ConnectCTA';
 import { PageView } from './types';
@@ -22,6 +24,8 @@ const App: React.FC = () => {
         return <About />;
       case 'contact':
         return <Contact />;
+      case 'privacy':
+        return <PrivacyPolicy />;
       default:
         return <Home onNavigate={setCurrentPage} />;
     }
@@ -35,10 +39,10 @@ const App: React.FC = () => {
         {renderPage()}
       </main>
 
-      {/* CTA Section on every page */}
+      {/* CTA Section on every page except Privacy Policy to keep it clean, or keep it if desired. keeping it for consistency */}
       <ConnectCTA onNavigate={setCurrentPage} />
 
-      <Footer />
+      <Footer onNavigate={setCurrentPage} />
       <ChatWidget />
     </div>
   );

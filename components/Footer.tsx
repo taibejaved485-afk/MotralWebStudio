@@ -1,7 +1,20 @@
+
 import React from 'react';
 import { Facebook, Twitter, Instagram, Mail, Phone, MapPin } from 'lucide-react';
+import { PageView } from '../types';
 
-const Footer: React.FC = () => {
+interface FooterProps {
+  onNavigate?: (page: PageView) => void;
+}
+
+const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
+  const handleNav = (page: PageView) => {
+    if (onNavigate) {
+      onNavigate(page);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
   return (
     <footer className="border-t border-gray-800 bg-gray-900 pt-16 pb-8">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -21,22 +34,29 @@ const Footer: React.FC = () => {
           <div>
             <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider text-white">Services</h4>
             <ul className="space-y-2 text-sm text-gray-400">
-              <li>Web Development</li>
-              <li>E-commerce</li>
-              <li>WordPress</li>
-              <li>Speed Optimization</li>
-              <li>Maintenance</li>
+              <li><button onClick={() => handleNav('services')} className="hover:text-brand-500 transition-colors">Web Development</button></li>
+              <li><button onClick={() => handleNav('services')} className="hover:text-brand-500 transition-colors">E-commerce</button></li>
+              <li><button onClick={() => handleNav('services')} className="hover:text-brand-500 transition-colors">WordPress</button></li>
+              <li><button onClick={() => handleNav('services')} className="hover:text-brand-500 transition-colors">Speed Optimization</button></li>
+              <li><button onClick={() => handleNav('services')} className="hover:text-brand-500 transition-colors">Maintenance</button></li>
             </ul>
           </div>
 
           <div>
             <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider text-white">Company</h4>
             <ul className="space-y-2 text-sm text-gray-400">
-              <li>About Us</li>
-              <li>Portfolio</li>
-              <li>Careers</li>
-              <li>Privacy Policy</li>
-              <li>Terms of Service</li>
+              <li><button onClick={() => handleNav('about')} className="hover:text-brand-500 transition-colors">About Us</button></li>
+              <li><button onClick={() => handleNav('home')} className="hover:text-brand-500 transition-colors">Portfolio</button></li>
+              <li><button onClick={() => handleNav('contact')} className="hover:text-brand-500 transition-colors">Careers</button></li>
+              <li>
+                <button 
+                  onClick={() => handleNav('privacy')} 
+                  className="hover:text-brand-500 transition-colors text-left"
+                >
+                  Privacy Policy
+                </button>
+              </li>
+              <li><button onClick={() => handleNav('contact')} className="hover:text-brand-500 transition-colors">Terms of Service</button></li>
             </ul>
           </div>
 

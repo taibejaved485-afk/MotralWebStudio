@@ -1,3 +1,4 @@
+
 export interface Service {
   id: string;
   title: string;
@@ -6,7 +7,7 @@ export interface Service {
   features: string[];
 }
 
-export type PageView = 'home' | 'services' | 'contact' | 'about';
+export type PageView = 'home' | 'services' | 'contact' | 'about' | 'privacy';
 
 export interface ChatMessage {
   role: 'user' | 'model';

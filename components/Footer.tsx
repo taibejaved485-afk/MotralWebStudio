@@ -28,12 +28,12 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
   const whatsappUrl = "https://wa.me/923706487654";
 
   return (
-    <footer className="border-t border-gray-800 bg-gray-900 pt-20 pb-10">
+    <footer className="border-t border-gray-800 bg-gradient-to-b from-gray-900 to-black pt-20 pb-10">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-y-12 gap-x-8 lg:gap-x-12">
           
           {/* Brand Column */}
-          <div className="space-y-6">
+          <div className="space-y-6 border-b border-gray-800 pb-10 md:border-b-0 md:pb-0">
             <h3 className="text-2xl font-bold font-serif text-white">
               Motral<span className="text-brand-500">WebStudio</span>
             </h3>
@@ -65,7 +65,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           </div>
 
           {/* Services Column */}
-          <div className="lg:border-l lg:border-gray-800 lg:pl-10">
+          <div className="lg:border-l lg:border-gray-800 lg:pl-10 border-b border-gray-800 pb-10 md:border-b-0 md:pb-0">
             <h4 className="mb-6 text-sm font-bold uppercase tracking-widest text-white relative inline-block after:content-[''] after:absolute after:-bottom-2 after:left-0 after:h-0.5 after:w-12 after:bg-brand-500">
               Services
             </h4>
@@ -79,7 +79,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           </div>
 
           {/* Company Column */}
-          <div className="lg:border-l lg:border-gray-800 lg:pl-10">
+          <div className="lg:border-l lg:border-gray-800 lg:pl-10 border-b border-gray-800 pb-10 md:border-b-0 md:pb-0">
             <h4 className="mb-6 text-sm font-bold uppercase tracking-widest text-white relative inline-block after:content-[''] after:absolute after:-bottom-2 after:left-0 after:h-0.5 after:w-12 after:bg-brand-500">
               Company
             </h4>
@@ -123,7 +123,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                 <div className="mt-1 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gray-800 text-brand-500 transition-colors group-hover:bg-brand-900/50">
                   <Mail className="h-4 w-4" />
                 </div>
-                <span className="mt-1.5 group-hover:text-white transition-colors">info@motralwebstudio.com</span>
+                <span className="mt-1.5 group-hover:text-white transition-colors break-all">info@motralwebstudio.com</span>
               </li>
               <li className="flex items-start gap-3 group">
                 <div className="mt-1 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gray-800 text-brand-500 transition-colors group-hover:bg-brand-900/50">
@@ -141,7 +141,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           </div>
         </div>
         
-        <div className="mt-20 border-t border-gray-800 pt-8">
+        <div className="mt-16 border-t border-gray-800 pt-8">
           <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
             <p className="text-sm text-gray-500">
               © {new Date().getFullYear()} Motral Web Studio. All rights reserved.

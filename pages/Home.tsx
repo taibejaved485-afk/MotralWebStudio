@@ -83,22 +83,29 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
       {/* Hero Section */}
       <section className="relative flex min-h-screen items-center justify-center overflow-hidden bg-gray-950 px-4 py-12 sm:px-6 lg:px-8 lg:py-0">
         
-        {/* Animated Background Blobs */}
+        {/* Animated Background Blobs - Reduced Opacity & Optimized */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-[-10%] left-[-10%] w-96 h-96 bg-brand-500/20 rounded-full blur-3xl animate-blob"></div>
-          <div className="absolute top-[20%] right-[-10%] w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-blob animation-delay-2000"></div>
-          <div className="absolute bottom-[-10%] left-[20%] w-96 h-96 bg-blue-500/20 rounded-full blur-3xl animate-blob animation-delay-4000"></div>
+          <div className="absolute top-[-10%] left-[-10%] w-96 h-96 bg-brand-500/10 rounded-full blur-3xl animate-blob will-change-transform"></div>
+          <div 
+            className="absolute top-[20%] right-[-10%] w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-blob will-change-transform" 
+            style={{ animationDelay: '2s' }}
+          ></div>
+          <div 
+            className="absolute bottom-[-10%] left-[20%] w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-blob will-change-transform" 
+            style={{ animationDelay: '4s' }}
+          ></div>
         </div>
 
-        {/* Video Background */}
+        {/* Video Background - Subtle Overlay */}
         <div className="absolute inset-0 -z-10 h-full w-full overflow-hidden">
-          <div className="absolute inset-0 bg-gray-950/80 z-10" /> 
+          <div className="absolute inset-0 bg-gray-950/90 z-10" /> 
           <video
             autoPlay
             loop
             muted
             playsInline
-            className="h-full w-full object-cover opacity-50"
+            preload="auto"
+            className="h-full w-full object-cover opacity-30 will-change-transform"
           >
             {/* Global Network / Earth loop */}
             <source src="https://cdn.pixabay.com/video/2019/04/20/22967-332386926_large.mp4" type="video/mp4" />
@@ -443,6 +450,50 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                 <div className="mt-auto flex flex-wrap gap-2">
                   <span className="inline-flex items-center rounded-md bg-blue-950/50 px-2 py-1 text-xs font-medium text-blue-400 ring-1 ring-inset ring-blue-500/20">E-Commerce</span>
                   <span className="inline-flex items-center rounded-md bg-gray-800 px-2 py-1 text-xs font-medium text-gray-300 ring-1 ring-inset ring-gray-700/20">Web Design</span>
+                </div>
+              </div>
+            </a>
+
+            {/* Free CV Maker Project Card */}
+            <a 
+              href="https://freecvmaker-motral.vercel.app/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="group flex flex-col overflow-hidden rounded-2xl bg-gray-900 border border-gray-800 transition-all hover:border-brand-500/50 hover:shadow-2xl hover:-translate-y-2"
+            >
+              {/* Image Area */}
+              <div className="relative aspect-[16/10] overflow-hidden bg-gray-800">
+                <div className="absolute inset-0 bg-gradient-to-br from-purple-900 to-gray-900 group-hover:scale-105 transition-transform duration-700"></div>
+                
+                {/* Abstract visualization */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="text-center">
+                        <div className="w-16 h-16 mx-auto bg-purple-600 rounded-2xl rotate-3 mb-4 shadow-lg flex items-center justify-center transition-transform group-hover:rotate-0">
+                            <span className="text-xl font-bold text-white -rotate-3 group-hover:rotate-0 transition-transform">CV</span>
+                        </div>
+                        <h3 className="text-2xl font-serif font-bold text-white/20 uppercase tracking-widest group-hover:text-white/40 transition-colors">CV Maker</h3>
+                    </div>
+                </div>
+
+                {/* Overlay */}
+                <div className="absolute inset-0 bg-brand-900/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-sm">
+                  <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 flex items-center gap-2 text-white font-bold bg-white/10 px-6 py-3 rounded-full border border-white/20 hover:bg-white hover:text-brand-900">
+                    Visit Website <ExternalLink className="h-4 w-4" />
+                  </div>
+                </div>
+              </div>
+
+              {/* Content Area */}
+              <div className="p-6 flex-1 flex flex-col">
+                <div className="mb-4">
+                  <h3 className="text-xl font-bold text-white mb-2 group-hover:text-brand-500 transition-colors">Free CV Maker</h3>
+                  <p className="text-gray-400 text-sm line-clamp-2">
+                    A professional resume builder tool helping users create stunning CVs in minutes.
+                  </p>
+                </div>
+                <div className="mt-auto flex flex-wrap gap-2">
+                  <span className="inline-flex items-center rounded-md bg-purple-950/50 px-2 py-1 text-xs font-medium text-purple-400 ring-1 ring-inset ring-purple-500/20">Web Tool</span>
+                  <span className="inline-flex items-center rounded-md bg-gray-800 px-2 py-1 text-xs font-medium text-gray-300 ring-1 ring-inset ring-gray-700/20">React App</span>
                 </div>
               </div>
             </a>

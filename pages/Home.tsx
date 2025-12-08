@@ -1,5 +1,5 @@
 
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { PageView } from '../types';
 import { 
   ArrowRight, Code, Zap, Globe, MessageCircle, 
@@ -55,6 +55,28 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
       style: 'font-mono font-bold tracking-tighter text-orange-800 text-xl' 
     },
   ];
+
+  // Animation logic for Why Choose Us
+  const [isWhyChooseUsVisible, setIsWhyChooseUsVisible] = useState(false);
+  const whyChooseUsRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsWhyChooseUsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.2 } // Trigger when 20% visible
+    );
+
+    if (whyChooseUsRef.current) {
+      observer.observe(whyChooseUsRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <div className="flex flex-col">
@@ -207,7 +229,10 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
             <h2 className="text-3xl font-bold text-white font-serif">Why Choose Motral Web Studio</h2>
           </div>
           
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 justify-items-center">
+          <div 
+            ref={whyChooseUsRef}
+            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 justify-items-center"
+          >
             {[
               { icon: HandCoins, label: 'Cost Efficient' },
               { icon: Clock, label: 'Minimal Timelines' },
@@ -218,7 +243,12 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
             ].map((item, index) => (
               <div 
                 key={index} 
-                className="group flex flex-col items-center gap-4 transition-all duration-300 hover:-translate-y-2"
+                className={`group flex flex-col items-center gap-4 transition-all duration-700 ease-out hover:-translate-y-2 ${
+                  isWhyChooseUsVisible 
+                    ? 'opacity-100 translate-y-0' 
+                    : 'opacity-0 translate-y-12'
+                }`}
+                style={{ transitionDelay: `${index * 100}ms` }}
               >
                 <div className="relative flex h-28 w-28 items-center justify-center rounded-full border-2 border-gray-800 bg-gray-900/50 transition-all duration-300 group-hover:border-brand-500 group-hover:bg-brand-900/20 group-hover:shadow-[0_0_30px_rgba(20,184,166,0.2)]">
                   <item.icon className="h-10 w-10 text-gray-400 transition-colors duration-300 group-hover:text-brand-500 group-hover:scale-110" />
@@ -368,6 +398,50 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                 </div>
                 <div className="mt-auto flex flex-wrap gap-2">
                   <span className="inline-flex items-center rounded-md bg-brand-950/50 px-2 py-1 text-xs font-medium text-brand-400 ring-1 ring-inset ring-brand-500/20">E-Commerce</span>
+                  <span className="inline-flex items-center rounded-md bg-gray-800 px-2 py-1 text-xs font-medium text-gray-300 ring-1 ring-inset ring-gray-700/20">Web Design</span>
+                </div>
+              </div>
+            </a>
+
+            {/* Taibe Mart Project Card */}
+            <a 
+              href="https://taibemart.infinityfreeapp.com/?i=1" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="group flex flex-col overflow-hidden rounded-2xl bg-gray-900 border border-gray-800 transition-all hover:border-brand-500/50 hover:shadow-2xl hover:-translate-y-2"
+            >
+              {/* Image Area */}
+              <div className="relative aspect-[16/10] overflow-hidden bg-gray-800">
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-900 to-gray-900 group-hover:scale-105 transition-transform duration-700"></div>
+                
+                {/* Abstract visualization */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="text-center">
+                        <div className="w-16 h-16 mx-auto bg-blue-600 rounded-2xl -rotate-6 mb-4 shadow-lg flex items-center justify-center transition-transform group-hover:rotate-0">
+                            <span className="text-2xl font-bold text-white rotate-6 group-hover:rotate-0 transition-transform">T</span>
+                        </div>
+                        <h3 className="text-2xl font-serif font-bold text-white/20 uppercase tracking-widest group-hover:text-white/40 transition-colors">Taibe Mart</h3>
+                    </div>
+                </div>
+
+                {/* Overlay */}
+                <div className="absolute inset-0 bg-brand-900/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-sm">
+                  <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 flex items-center gap-2 text-white font-bold bg-white/10 px-6 py-3 rounded-full border border-white/20 hover:bg-white hover:text-brand-900">
+                    Visit Website <ExternalLink className="h-4 w-4" />
+                  </div>
+                </div>
+              </div>
+
+              {/* Content Area */}
+              <div className="p-6 flex-1 flex flex-col">
+                <div className="mb-4">
+                  <h3 className="text-xl font-bold text-white mb-2 group-hover:text-brand-500 transition-colors">Taibe Mart</h3>
+                  <p className="text-gray-400 text-sm line-clamp-2">
+                    A comprehensive online mart platform designed for seamless shopping experiences.
+                  </p>
+                </div>
+                <div className="mt-auto flex flex-wrap gap-2">
+                  <span className="inline-flex items-center rounded-md bg-blue-950/50 px-2 py-1 text-xs font-medium text-blue-400 ring-1 ring-inset ring-blue-500/20">E-Commerce</span>
                   <span className="inline-flex items-center rounded-md bg-gray-800 px-2 py-1 text-xs font-medium text-gray-300 ring-1 ring-inset ring-gray-700/20">Web Design</span>
                 </div>
               </div>

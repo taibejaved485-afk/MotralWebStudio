@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import { MessageSquare, X, Send, Sparkles, Loader2, ThumbsUp, ThumbsDown } from 'lucide-react';
 import { ChatMessage, LoadingState } from '../types';
@@ -56,27 +55,27 @@ const ChatWidget: React.FC = () => {
       {/* Toggle Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-brand-600 shadow-lg shadow-brand-900/50 transition-all hover:scale-110 hover:bg-brand-500 focus:outline-none"
+        className="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-primary shadow-lg shadow-blue-500/30 transition-all hover:scale-110 hover:bg-blue-600 focus:outline-none"
       >
         {isOpen ? <X className="h-6 w-6 text-white" /> : <MessageSquare className="h-6 w-6 text-white" />}
       </button>
 
       {/* Chat Window */}
       {isOpen && (
-        <div className="fixed bottom-24 right-6 z-50 flex h-[500px] w-[90%] max-w-[380px] flex-col overflow-hidden rounded-2xl border border-gray-700 bg-gray-900 shadow-2xl sm:right-6">
+        <div className="fixed bottom-24 right-6 z-50 flex h-[500px] w-[90%] max-w-[380px] flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-2xl sm:right-6">
           {/* Header */}
-          <div className="flex items-center gap-2 border-b border-gray-800 bg-gray-950 p-4">
-            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-brand-600/20">
-              <Sparkles className="h-4 w-4 text-brand-500" />
+          <div className="flex items-center gap-2 border-b border-gray-100 bg-secondary p-4">
+            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/20">
+              <Sparkles className="h-4 w-4 text-primary" />
             </div>
             <div>
               <h3 className="text-sm font-bold text-white">Motral AI</h3>
-              <p className="text-xs text-brand-400">Ask about our services</p>
+              <p className="text-xs text-gray-300">Ask about our services</p>
             </div>
           </div>
 
           {/* Messages */}
-          <div className="flex-1 overflow-y-auto bg-gray-900 p-4">
+          <div className="flex-1 overflow-y-auto bg-gray-50 p-4">
             <div className="space-y-4">
               {messages.map((msg, idx) => (
                 <div
@@ -86,42 +85,18 @@ const ChatWidget: React.FC = () => {
                   <div
                     className={`max-w-[80%] rounded-2xl px-4 py-3 text-sm leading-relaxed ${
                       msg.role === 'user'
-                        ? 'bg-brand-600 text-white rounded-br-none'
-                        : 'bg-gray-800 text-gray-200 rounded-bl-none'
+                        ? 'bg-primary text-white rounded-br-none shadow-md'
+                        : 'bg-white text-gray-800 rounded-bl-none shadow-sm border border-gray-100'
                     }`}
                   >
                     {msg.text}
                   </div>
-                  {msg.role === 'model' && (
-                    <div className="mt-1 flex gap-2 px-1">
-                      <button
-                        onClick={() => handleFeedback(idx, 'up')}
-                        className={`rounded p-1 transition-colors hover:bg-gray-800 ${
-                          msg.feedback === 'up' ? 'text-brand-500' : 'text-gray-500'
-                        }`}
-                        aria-label="Helpful"
-                        title="Helpful"
-                      >
-                        <ThumbsUp className="h-3 w-3" />
-                      </button>
-                      <button
-                        onClick={() => handleFeedback(idx, 'down')}
-                        className={`rounded p-1 transition-colors hover:bg-gray-800 ${
-                          msg.feedback === 'down' ? 'text-rose-500' : 'text-gray-500'
-                        }`}
-                        aria-label="Not helpful"
-                        title="Not helpful"
-                      >
-                        <ThumbsDown className="h-3 w-3" />
-                      </button>
-                    </div>
-                  )}
                 </div>
               ))}
               {status === LoadingState.LOADING && (
                 <div className="flex justify-start">
-                  <div className="bg-gray-800 rounded-2xl rounded-bl-none px-4 py-3">
-                    <Loader2 className="h-4 w-4 animate-spin text-brand-500" />
+                  <div className="bg-white rounded-2xl rounded-bl-none px-4 py-3 shadow-sm border border-gray-100">
+                    <Loader2 className="h-4 w-4 animate-spin text-primary" />
                   </div>
                 </div>
               )}
@@ -130,7 +105,7 @@ const ChatWidget: React.FC = () => {
           </div>
 
           {/* Input */}
-          <div className="border-t border-gray-800 bg-gray-950 p-4">
+          <div className="border-t border-gray-200 bg-white p-4">
             <div className="relative flex items-center">
               <input
                 type="text"
@@ -138,12 +113,12 @@ const ChatWidget: React.FC = () => {
                 onChange={(e) => setInputText(e.target.value)}
                 onKeyDown={handleKeyPress}
                 placeholder="Ask about website speed..."
-                className="w-full rounded-full border border-gray-700 bg-gray-900 py-3 pl-4 pr-12 text-sm text-white placeholder-gray-500 focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500"
+                className="w-full rounded-full border border-gray-300 bg-gray-50 py-3 pl-4 pr-12 text-sm text-gray-900 placeholder-gray-500 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
               />
               <button
                 onClick={handleSend}
                 disabled={status === LoadingState.LOADING || !inputText.trim()}
-                className="absolute right-2 rounded-full bg-brand-600 p-2 text-white transition-colors hover:bg-brand-500 disabled:opacity-50"
+                className="absolute right-2 rounded-full bg-primary p-2 text-white transition-colors hover:bg-blue-600 disabled:opacity-50"
               >
                 <Send className="h-4 w-4" />
               </button>

@@ -1,33 +1,42 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Motral Web Studio</title>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%2314b8a6%22/><text x=%2250%22 y=%2270%22 font-family=%22Times New Roman, serif%22 font-size=%2270%22 font-weight=%22bold%22 fill=%22white%22 text-anchor=%22middle%22>M</text></svg>" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script>
       tailwind.config = {
         theme: {
           extend: {
+            colors: {
+              primary: '#0D6EFD', // Tech Blue
+              secondary: '#0B1527', // Deep Navy
+              accent: '#00D1FF', // Neon Cyan
+              background: '#F5F7FA', // Light Gray
+              brand: {
+                50: '#eef6ff',
+                100: '#d9e9ff',
+                200: '#bcd8ff',
+                300: '#8ec0ff',
+                400: '#599dff',
+                500: '#0D6EFD',
+                600: '#0055dd',
+                700: '#0044b0',
+                800: '#003a8c',
+                900: '#0B1527',
+                950: '#060c18',
+              }
+            },
             fontFamily: {
               sans: ['Inter', 'sans-serif'],
               serif: ['Playfair Display', 'serif'],
             },
-            colors: {
-              brand: {
-                50: '#f0fdfa',
-                100: '#ccfbf1',
-                500: '#14b8a6',
-                600: '#0d9488',
-                900: '#134e4a',
-                950: '#042f2e',
-              }
-            },
             animation: {
-              blob: "blob 20s infinite",
+              blob: "blob 7s infinite",
+              scroll: "scroll 30s linear infinite",
             },
             keyframes: {
               blob: {
@@ -44,41 +53,33 @@
                   transform: "translate(0px, 0px) scale(1)",
                 },
               },
+              scroll: {
+                "0%": { transform: "translateX(0)" },
+                "100%": { transform: "translateX(-50%)" },
+              }
             },
           }
         }
       }
     </script>
     <style>
-      /* Custom scrollbar for better aesthetics */
-      ::-webkit-scrollbar {
-        width: 8px;
-      }
-      ::-webkit-scrollbar-track {
-        background: #111827; 
-      }
-      ::-webkit-scrollbar-thumb {
-        background: #374151; 
-        border-radius: 4px;
-      }
-      ::-webkit-scrollbar-thumb:hover {
-        background: #4b5563; 
-      }
+      body { font-family: 'Inter', sans-serif; }
+      h1, h2, h3, h4, h5, h6 { font-family: 'Playfair Display', serif; }
     </style>
   <script type="importmap">
 {
   "imports": {
-    "react/": "https://aistudiocdn.com/react@^19.2.1/",
     "react": "https://aistudiocdn.com/react@^19.2.1",
     "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.1/",
-    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.31.0",
+    "react/": "https://aistudiocdn.com/react@^19.2.1/",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.32.0",
     "lucide-react": "https://aistudiocdn.com/lucide-react@^0.556.0",
     "@emailjs/browser": "https://aistudiocdn.com/@emailjs/browser@^4.4.1"
   }
 }
 </script>
 </head>
-  <body class="bg-gray-950 text-white antialiased">
+  <body>
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
   </body>

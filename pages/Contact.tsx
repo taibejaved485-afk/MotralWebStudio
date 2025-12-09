@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Phone, MapPin, Facebook, Twitter, Linkedin, MessageCircle } from 'lucide-react';
 
@@ -90,20 +91,6 @@ const Contact: React.FC = () => {
                   rows={4} 
                   className="w-full bg-transparent border-b border-gray-700 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-brand-500 transition-colors resize-none"
                 ></textarea>
-              </div>
-
-              {/* Fake ReCAPTCHA */}
-              <div className="flex items-center gap-4 border border-gray-700 bg-gray-800/50 p-3 rounded-md w-max select-none">
-                <div className="h-6 w-6 border-2 border-gray-500 rounded bg-gray-200 hover:border-gray-400 cursor-pointer"></div>
-                <span className="text-sm text-gray-300">I'm not a robot</span>
-                <div className="ml-4 flex flex-col items-center">
-                  <img 
-                    src="https://www.gstatic.com/recaptcha/api2/logo_48.png" 
-                    className="h-8 w-8 opacity-70" 
-                    alt="reCAPTCHA"
-                  />
-                  <span className="text-[10px] text-gray-500">reCAPTCHA</span>
-                </div>
               </div>
 
               <div className="pt-4">

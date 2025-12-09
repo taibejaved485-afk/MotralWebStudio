@@ -126,7 +126,7 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
           observer.disconnect();
         }
       },
-      { threshold: 0.2 } // Trigger when 20% visible
+      { threshold: 0.15 } // Trigger when 15% visible
     );
 
     if (whyChooseUsRef.current) {
@@ -352,7 +352,10 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                 }`}
                 style={{ transitionDelay: `${index * 100}ms` }}
               >
-                <div className="relative flex h-28 w-28 items-center justify-center rounded-full border-2 border-gray-800 bg-gray-900/50 transition-all duration-300 group-hover:border-brand-500 group-hover:bg-brand-900/20 group-hover:shadow-[0_0_30px_rgba(20,184,166,0.2)]">
+                <div className={`relative flex h-28 w-28 items-center justify-center rounded-full border-2 border-gray-800 bg-gray-900/50 transition-all duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] ${
+                    isWhyChooseUsVisible ? 'scale-100 rotate-0' : 'scale-0 -rotate-180'
+                  } group-hover:border-brand-500 group-hover:bg-brand-900/20 group-hover:shadow-[0_0_30px_rgba(20,184,166,0.2)]`}
+                >
                   <item.icon className="h-10 w-10 text-gray-400 transition-colors duration-300 group-hover:text-brand-500 group-hover:scale-110" />
                 </div>
                 <span className="text-center text-sm font-semibold text-gray-300 group-hover:text-white max-w-[120px]">

@@ -1,10 +1,11 @@
 
 import React, { useRef, useState, useEffect } from 'react';
+import emailjs from '@emailjs/browser';
 import { PageView } from '../types';
 import { 
   ArrowRight, Code, Zap, Globe, MessageCircle, 
   HandCoins, Clock, Award, Lightbulb, MessagesSquare, Headset,
-  ChevronLeft, ChevronRight, ExternalLink
+  ChevronLeft, ChevronRight, ExternalLink, Loader2, CheckCircle
 } from 'lucide-react';
 
 interface HomeProps {
@@ -12,6 +13,63 @@ interface HomeProps {
 }
 
 const Home: React.FC<HomeProps> = ({ onNavigate }) => {
+  // --- EmailJS Configuration ---
+  // TODO: Replace these placeholders with your actual EmailJS keys from https://dashboard.emailjs.com/
+  const EMAILJS_SERVICE_ID = 'YOUR_SERVICE_ID'; 
+  const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID'; 
+  const EMAILJS_PUBLIC_KEY = 'YOUR_PUBLIC_KEY'; 
+
+  // Form State
+  const [formData, setFormData] = useState({
+    name: '',
+    phone: '',
+    email: '',
+    subject: 'Requirement'
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!formData.name || !formData.email || !formData.phone) {
+      alert("Please fill in all required fields.");
+      return;
+    }
+
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+
+    // Prepare template parameters
+    const templateParams = {
+      from_name: formData.name,
+      from_email: formData.email,
+      phone_number: formData.phone,
+      subject: formData.subject,
+      to_name: 'Motral Web Studio Admin',
+    };
+
+    emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams, EMAILJS_PUBLIC_KEY)
+      .then((response) => {
+        console.log('SUCCESS!', response.status, response.text);
+        setSubmitStatus('success');
+        setFormData({ name: '', phone: '', email: '', subject: 'Requirement' }); // Reset form
+      })
+      .catch((err) => {
+        console.error('FAILED...', err);
+        setSubmitStatus('error');
+      })
+      .finally(() => {
+        setIsSubmitting(false);
+        // Reset status message after 5 seconds
+        setTimeout(() => setSubmitStatus('idle'), 5000);
+      });
+  };
+
   // Clients data - Switched to text-only for consistency and cleaner look
   const clients = [
     { 
@@ -137,8 +195,9 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                   Get Started
                 </button>
                 <button
+                   onClick={() => onNavigate('contact')}
                    className="flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-full bg-[#25D366] text-white transition-transform hover:scale-110 hover:shadow-[0_0_20px_rgba(37,211,102,0.4)]"
-                   aria-label="WhatsApp"
+                   aria-label="Contact Us"
                 >
                   <MessageCircle className="h-5 w-5 sm:h-6 sm:w-6 fill-current" />
                 </button>
@@ -150,22 +209,30 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
               <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-1">Get a Call back Request</h2>
               <p className="text-xs sm:text-sm text-gray-500 mb-6">All Inquiries are Responded within 24 hours</p>
               
-              <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+              <form className="space-y-4" onSubmit={handleSubmit}>
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-1">
                     <label className="text-xs font-semibold text-gray-700 uppercase">Name</label>
                     <input 
                       type="text" 
+                      name="name"
+                      value={formData.name}
+                      onChange={handleInputChange}
                       placeholder="Name" 
-                      className="w-full rounded-md border border-gray-300 bg-gray-50 px-3 py-2 text-sm outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500"
+                      required
+                      className="w-full rounded-md border border-gray-300 bg-gray-50 px-3 py-2 text-sm outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 text-gray-900"
                     />
                   </div>
                   <div className="space-y-1">
                     <label className="text-xs font-semibold text-gray-700 uppercase">Phone</label>
                     <input 
                       type="tel" 
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleInputChange}
                       placeholder="Phone" 
-                      className="w-full rounded-md border border-gray-300 bg-gray-50 px-3 py-2 text-sm outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500"
+                      required
+                      className="w-full rounded-md border border-gray-300 bg-gray-50 px-3 py-2 text-sm outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 text-gray-900"
                     />
                   </div>
                 </div>
@@ -174,29 +241,57 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                   <label className="text-xs font-semibold text-gray-700 uppercase">Email</label>
                   <input 
                     type="email" 
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
                     placeholder="Email" 
-                    className="w-full rounded-md border border-gray-300 bg-gray-50 px-3 py-2 text-sm outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500"
+                    required
+                    className="w-full rounded-md border border-gray-300 bg-gray-50 px-3 py-2 text-sm outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 text-gray-900"
                   />
                 </div>
                 
                 <div className="space-y-1">
                   <label className="text-xs font-semibold text-gray-700 uppercase">Subject</label>
-                  <select className="w-full rounded-md border border-gray-300 bg-gray-50 px-3 py-2 text-sm outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500">
-                    <option>Requirement</option>
-                    <option>Web Design</option>
-                    <option>Development</option>
-                    <option>SEO</option>
-                    <option>Other</option>
+                  <select 
+                    name="subject"
+                    value={formData.subject}
+                    onChange={handleInputChange}
+                    className="w-full rounded-md border border-gray-300 bg-gray-50 px-3 py-2 text-sm outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 text-gray-900"
+                  >
+                    <option value="Requirement">Requirement</option>
+                    <option value="Web Design">Web Design</option>
+                    <option value="Development">Development</option>
+                    <option value="SEO">SEO</option>
+                    <option value="Other">Other</option>
                   </select>
                 </div>
 
                 <div className="pt-2">
                   <button 
                     type="submit"
-                    className="w-full rounded-md bg-brand-600 px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-brand-700 uppercase tracking-wide"
+                    disabled={isSubmitting}
+                    className="w-full flex items-center justify-center gap-2 rounded-md bg-brand-600 px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-brand-700 uppercase tracking-wide disabled:opacity-70 disabled:cursor-not-allowed"
                   >
-                    Submit Request
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="h-4 w-4 animate-spin" /> Sending...
+                      </>
+                    ) : (
+                      "Submit Request"
+                    )}
                   </button>
+                  
+                  {/* Status Messages */}
+                  {submitStatus === 'success' && (
+                    <div className="mt-3 flex items-center justify-center gap-2 text-sm text-green-600 font-bold bg-green-50 p-2 rounded">
+                      <CheckCircle className="h-4 w-4" /> Request Sent Successfully!
+                    </div>
+                  )}
+                  {submitStatus === 'error' && (
+                    <div className="mt-3 text-center text-sm text-red-600 font-bold bg-red-50 p-2 rounded">
+                      Failed to send. Check configuration or try again.
+                    </div>
+                  )}
                 </div>
               </form>
             </div>

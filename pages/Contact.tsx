@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Phone, MapPin, Facebook, Twitter, Linkedin, MessageCircle, Mail, Clock, Send, Loader2, CheckCircle, HelpCircle, ChevronDown, ChevronUp, ExternalLink, User, FileText } from 'lucide-react';
+import { Phone, MapPin, Facebook, Twitter, Linkedin, MessageCircle, Mail, Clock, Send, Loader2, CheckCircle, HelpCircle, ChevronDown, ExternalLink, User, FileText } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 
 const Contact: React.FC = () => {
@@ -397,21 +397,21 @@ const Contact: React.FC = () => {
                     >
                         <button
                             onClick={() => setOpenFaqIndex(openFaqIndex === index ? null : index)}
-                            className="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none"
+                            className="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none group"
                         >
-                            <span className="font-bold text-secondary text-lg flex items-center gap-3">
-                                <HelpCircle className={`h-5 w-5 ${openFaqIndex === index ? 'text-primary' : 'text-gray-400'}`} />
+                            <span className={`font-bold text-lg flex items-center gap-3 transition-colors ${openFaqIndex === index ? 'text-primary' : 'text-secondary group-hover:text-primary'}`}>
+                                <HelpCircle className={`h-5 w-5 transition-colors ${openFaqIndex === index ? 'text-primary' : 'text-gray-400 group-hover:text-primary'}`} />
                                 {faq.question}
                             </span>
-                            {openFaqIndex === index ? (
-                                <ChevronUp className="h-5 w-5 text-primary" />
-                            ) : (
-                                <ChevronDown className="h-5 w-5 text-gray-400" />
-                            )}
+                            <ChevronDown 
+                                className={`h-5 w-5 transition-transform duration-300 ${
+                                    openFaqIndex === index ? 'rotate-180 text-primary' : 'text-gray-400 group-hover:text-primary'
+                                }`} 
+                            />
                         </button>
                         <div 
-                            className={`px-6 overflow-hidden transition-all duration-300 ease-in-out ${
-                                openFaqIndex === index ? 'max-h-48 pb-6 opacity-100' : 'max-h-0 opacity-0'
+                            className={`px-6 overflow-hidden transition-all duration-500 ease-in-out ${
+                                openFaqIndex === index ? 'max-h-96 opacity-100 pb-6' : 'max-h-0 opacity-0'
                             }`}
                         >
                             <p className="text-gray-600 pl-8 leading-relaxed">
